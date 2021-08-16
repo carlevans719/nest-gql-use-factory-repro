@@ -14,6 +14,7 @@ import { AppResolver } from './app.resolver';
     {
       provide: 'FOO', // AppResolver not working here either
       useFactory(): AppResolver {
+        console.log('FACTORY FUNCTION CALLED');
         return new AppResolver();
       }
     }
