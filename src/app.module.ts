@@ -12,7 +12,7 @@ import { AppResolver } from './app.resolver';
   ],
   providers: [
     {
-      provide: 'FOO',
+      provide: 'FOO', // AppResolver not working here either
       useFactory(): AppResolver {
         return new AppResolver();
       }
