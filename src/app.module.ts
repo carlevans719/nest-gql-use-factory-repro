@@ -11,13 +11,25 @@ import { AppResolver } from './app.resolver';
     }),
   ],
   providers: [
+    // Doesn't Work:
     {
       provide: 'FOO', // AppResolver not working here either
       useFactory(): AppResolver {
         console.log('FACTORY FUNCTION CALLED');
         return new AppResolver();
-      }
-    }
+      },
+    },
+
+
+    // Also Doesn't Work:
+    // {
+    //   provide: 'FOO', // AppResolver not working here either
+    //   useValue: new AppResolver(),
+    // },
+
+
+    // Works:
+    // AppResolver,
   ],
 })
 export class AppModule {}
