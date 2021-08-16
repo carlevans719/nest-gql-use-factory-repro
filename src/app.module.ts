@@ -7,11 +7,22 @@ import { AppResolver } from './app.resolver';
     GraphQLModule.forRoot({
       debug: true,
       introspection: true,
-      autoSchemaFile: true,
+      autoSchemaFile: true, // Disabling this makes the useClass approach work
     }),
   ],
   providers: [
-    // Doesn't Work:
+    // Works:
+    // AppResolver,
+
+
+    // Only works when `autoSchemaFile !== true`
+    // {
+    //   provide: 'FOO',
+    //   useClass: AppResolver,
+    // },
+
+
+    // Doesn't work:
     {
       provide: 'FOO', // AppResolver not working here either
       useFactory(): AppResolver {
@@ -21,15 +32,11 @@ import { AppResolver } from './app.resolver';
     },
 
 
-    // Also Doesn't Work:
+    // Also doesn't work:
     // {
-    //   provide: 'FOO', // AppResolver not working here either
+    //   provide: 'FOO',
     //   useValue: new AppResolver(),
     // },
-
-
-    // Works:
-    // AppResolver,
   ],
 })
 export class AppModule {}
